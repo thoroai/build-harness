@@ -15,9 +15,7 @@
 {{- end }}
 <!-- markdownlint-restore -->
 
-[![README Header][readme_header_img]][readme_header_link]
-
-[![Cloud Posse][logo]](https://cpco.io/homepage)
+[![Thoro AI, LLC][logo]][website]
 
 <!--
 
@@ -70,18 +68,7 @@ We literally have [*hundreds of other terraform modules*][terraform_modules] tha
 
 ---
 
-This project {{ if $deprecated }}was{{ else }}is{{ end }} part of our comprehensive ["SweetOps"](https://cpco.io/sweetops) approach towards DevOps.
-[<img align="right" title="Share via Email" src="https://docs.cloudposse.com/images/ionicons/ios-email-outline-2.0.1-16x16-999999.svg"/>][share_email]
-[<img align="right" title="Share on Google+" src="https://docs.cloudposse.com/images/ionicons/social-googleplus-outline-2.0.1-16x16-999999.svg" />][share_googleplus]
-[<img align="right" title="Share on Facebook" src="https://docs.cloudposse.com/images/ionicons/social-facebook-outline-2.0.1-16x16-999999.svg" />][share_facebook]
-[<img align="right" title="Share on Reddit" src="https://docs.cloudposse.com/images/ionicons/social-reddit-outline-2.0.1-16x16-999999.svg" />][share_reddit]
-[<img align="right" title="Share on LinkedIn" src="https://docs.cloudposse.com/images/ionicons/social-linkedin-outline-2.0.1-16x16-999999.svg" />][share_linkedin]
-[<img align="right" title="Share on Twitter" src="https://docs.cloudposse.com/images/ionicons/social-twitter-outline-2.0.1-16x16-999999.svg" />][share_twitter]
-
-{{ if (file.Exists "main.tf") }}
-[![Terraform Open Source Modules](https://docs.cloudposse.com/images/terraform-open-source-modules.svg)][terraform_modules]
-{{end}}
-
+{{ if has (ds "config") "license" }}
 {{ if eq (ds "config").license "APACHE2" }}
 It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 {{ end }}
@@ -100,10 +87,7 @@ It's 100% Open Source and licensed under the [Internet Systems Consortium](LICEN
 It's 100% Open Source and licensed under the [GNU General Public License](LICENSE).
 {{ end }}
 
-{{ if not $deprecated }}
-{{- if (file.Exists "main.tf") }}
-We literally have [*hundreds of terraform modules*][terraform_modules] that are Open Source and well-maintained. Check them out!
-{{- end }}
+{{ end }}
 
 
 {{ if has (ds "config") "screenshots" }}
@@ -112,35 +96,11 @@ We literally have [*hundreds of terraform modules*][terraform_modules] that are 
 {{ range $screenshot := (ds "config").screenshots }}
 {{ printf "![%s](%s)\n*%s*" $screenshot.name $screenshot.url $screenshot.description }}{{ end }}
 {{- end }}
-{{- end }}
 
 {{ if has (ds "config") "introduction" }}
 ## Introduction
 
 {{ (ds "config").introduction }}
-{{ end }}
-
-{{ if (file.Exists "main.tf") }}
-{{- $repo_encoded := (ds "config").github_repo | regexp.Replace "/" "%2F" -}}
-## Security & Compliance [<img src="https://cloudposse.com/wp-content/uploads/2020/11/bridgecrew.svg" width="250" align="right" />](https://bridgecrew.io/)
-
-Security scanning is graciously provided by Bridgecrew. Bridgecrew is the leading fully hosted, cloud-native solution providing continuous Terraform security and compliance.
-
-| Benchmark | Description |
-|--------|---------------|
-{{- if $deprecated }}
-| [![deprecated](https://img.shields.io/badge/lifecycle-deprecated-critical)](#deprecated) | This project is no longer being maintained |
-{{- end }}
-| [![Infrastructure Security]({{ printf "https://www.bridgecrew.cloud/badges/github/%s/general" (ds "config").github_repo}})]({{ printf "https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=%s&benchmark=INFRASTRUCTURE+SECURITY" $repo_encoded }}) | Infrastructure Security Compliance |
-| [![CIS KUBERNETES]({{ printf "https://www.bridgecrew.cloud/badges/github/%s/cis_kubernetes" (ds "config").github_repo}})]({{ printf "https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=%s&benchmark=CIS+KUBERNETES+V1.5" $repo_encoded }}) | Center for Internet Security, KUBERNETES Compliance |
-| [![CIS AWS]({{ printf "https://www.bridgecrew.cloud/badges/github/%s/cis_aws" (ds "config").github_repo}})]({{ printf "https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=%s&benchmark=CIS+AWS+V1.2" $repo_encoded }}) | Center for Internet Security, AWS Compliance |
-| [![CIS AZURE]({{ printf "https://www.bridgecrew.cloud/badges/github/%s/cis_azure" (ds "config").github_repo}})]({{ printf "https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=%s&benchmark=CIS+AZURE+V1.1" $repo_encoded }}) | Center for Internet Security, AZURE Compliance |
-| [![PCI-DSS]({{ printf "https://www.bridgecrew.cloud/badges/github/%s/pci" (ds "config").github_repo}})]({{ printf "https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=%s&benchmark=PCI-DSS+V3.2" $repo_encoded }}) | Payment Card Industry Data Security Standards Compliance |
-| [![NIST-800-53]({{ printf "https://www.bridgecrew.cloud/badges/github/%s/nist" (ds "config").github_repo}})]({{ printf "https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=%s&benchmark=NIST-800-53" $repo_encoded }}) | National Institute of Standards and Technology Compliance |
-| [![ISO27001]({{ printf "https://www.bridgecrew.cloud/badges/github/%s/iso" (ds "config").github_repo}})]({{ printf "https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=%s&benchmark=ISO27001" $repo_encoded }}) | Information Security Management System, ISO/IEC 27001 Compliance |
-| [![SOC2]({{ printf "https://www.bridgecrew.cloud/badges/github/%s/soc2" (ds "config").github_repo}})]({{ printf "https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=%s&benchmark=SOC2" $repo_encoded }})| Service Organization Control 2 Compliance |
-| [![CIS GCP]({{ printf "https://www.bridgecrew.cloud/badges/github/%s/cis_gcp" (ds "config").github_repo}})]({{ printf "https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=%s&benchmark=CIS+GCP+V1.1" $repo_encoded }}) | Center for Internet Security, GCP Compliance |
-| [![HIPAA]({{ printf "https://www.bridgecrew.cloud/badges/github/%s/hipaa" (ds "config").github_repo}})]({{ printf "https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=%s&benchmark=HIPAA" $repo_encoded }}) | Health Insurance Portability and Accountability Compliance |
 {{ end }}
 
 {{ if has (ds "config") "usage" }}
@@ -179,15 +139,7 @@ The table below correctly indicates which inputs are required.
 {{ (include "includes" $file) }}
 {{- end }}
 {{- end }}
-{{ if has (ds "config") "related" }}
 
-## Share the Love
-
-Like this project? Please give it a ★ on [our GitHub]({{ printf "https://github.com/%s" (ds "config").github_repo}})! (it helps us **a lot**)
-
-Are you using this project or any of our other projects? Consider [leaving a testimonial][testimonial]. =)
-
-{{ end }}
 {{ if has (ds "config") "related" }}
 ## Related Projects
 
@@ -206,54 +158,6 @@ For additional context, refer to some of these links.
 {{ printf "- [%s](%s) - %s" $reference.name $reference.url $reference.description }}{{ end }}
 
 {{ end}}
-## Help
-
-**Got a question?** We got answers.
-
-File a GitHub [issue]({{ printf "https://github.com/%s/issues" (ds "config").github_repo}}), send us an [email][email] or join our [Slack Community][slack].
-
-[![README Commercial Support][readme_commercial_support_img]][readme_commercial_support_link]
-
-## DevOps Accelerator for Startups
-
-
-We are a [**DevOps Accelerator**][commercial_support]. We'll help you build your cloud infrastructure from the ground up so you can own it. Then we'll show you how to operate it and stick around for as long as you need us.
-
-[![Learn More](https://img.shields.io/badge/learn%20more-success.svg?style=for-the-badge)][commercial_support]
-
-Work directly with our team of DevOps experts via email, slack, and video conferencing.
-
-We deliver 10x the value for a fraction of the cost of a full-time engineer. Our track record is not even funny. If you want things done right and you need it done FAST, then we're your best bet.
-
-- **Reference Architecture.** You'll get everything you need from the ground up built using 100% infrastructure as code.
-- **Release Engineering.** You'll have end-to-end CI/CD with unlimited staging environments.
-- **Site Reliability Engineering.** You'll have total visibility into your apps and microservices.
-- **Security Baseline.** You'll have built-in governance with accountability and audit logs for all changes.
-- **GitOps.** You'll be able to operate your infrastructure via Pull Requests.
-- **Training.** You'll receive hands-on training so your team can operate what we build.
-- **Questions.** You'll have a direct line of communication between our teams via a Shared Slack channel.
-- **Troubleshooting.** You'll get help to triage when things aren't working.
-- **Code Reviews.** You'll receive constructive feedback on Pull Requests.
-- **Bug Fixes.** We'll rapidly work with you to fix any bugs in our projects.
-
-## Slack Community
-
-Join our [Open Source Community][slack] on Slack. It's **FREE** for everyone! Our "SweetOps" community is where you get to talk with others who share a similar vision for how to rollout and manage infrastructure. This is the best place to talk shop, ask questions, solicit feedback, and work together as a community to build totally *sweet* infrastructure.
-
-## Discourse Forums
-
-Participate in our [Discourse Forums][discourse]. Here you'll find answers to commonly asked questions. Most questions will be related to the enormous number of projects we support on our GitHub. Come here to collaborate on answers, find solutions, and get ideas about the products and services we value. It only takes a minute to get started! Just sign in with SSO using your GitHub account.
-
-## Newsletter
-
-Sign up for [our newsletter][newsletter] that covers everything on our technology radar.  Receive updates on what we're up to on GitHub as well as awesome new projects we discover.
-
-## Office Hours
-
-[Join us every Wednesday via Zoom][office_hours] for our weekly "Lunch & Learn" sessions. It's **FREE** for everyone!
-
-[![zoom](https://img.cloudposse.com/fit-in/200x200/https://cloudposse.com/wp-content/uploads/2019/08/Powered-by-Zoom.png")][office_hours]
-
 {{ if not $deprecated -}}
 ## Contributing
 
@@ -286,8 +190,10 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 ## Copyright
 
 Copyright © 2017-{{ time.Now.Year }} [Cloud Posse, LLC](https://cpco.io/copyright)
+Copyright © 2017-{{ time.Now.Year }} [Cloud Posse, LLC](https://cpco.io/copyright)
 {{ end}}
 
+{{ if has (ds "config") "license" }}
 {{ if eq (ds "config").license "APACHE2" }}
 ## License
 
@@ -405,6 +311,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
 {{ end }}
+{{ end}}
 
 ## Trademarks
 
@@ -412,16 +319,9 @@ All other trademarks referenced herein are the property of their respective owne
 
 ## About
 
-This project is maintained and funded by [Cloud Posse, LLC][website]. Like it? Please let us know by [leaving a testimonial][testimonial]!
+This project is maintained and funded by [Thoro AI, LLC][website].
 
-[![Cloud Posse][logo]][website]
-
-We're a [DevOps Professional Services][hire] company based in Los Angeles, CA. We ❤️  [Open Source Software][we_love_open_source].
-
-We offer [paid support][commercial_support] on all of our projects.
-
-Check out [our other projects][github], [follow us on twitter][twitter], [apply for a job][jobs], or [hire us][hire] to help with your cloud strategy and implementation.
-
+[![Thoro AI, LLC][logo]][website]
 
 {{ if has (datasource "config") "contributors" }}
 ### Contributors
@@ -446,36 +346,7 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
 
 {{- $utm_link := printf "%%s?utm_source=%s&utm_medium=%s&utm_campaign=%s&utm_content=%s" "github" "readme" (ds "config").github_repo "%s" -}}
 
-[![README Footer][readme_footer_img]][readme_footer_link]
-[![Beacon][beacon]][website]
-
-  [logo]: https://cloudposse.com/logo-300x69.svg
-  [docs]: {{ printf $utm_link "https://cpco.io/docs" "docs" }}
-  [website]: {{ printf $utm_link "https://cpco.io/homepage" "website" }}
-  [github]: {{ printf $utm_link "https://cpco.io/github" "github" }}
-  [jobs]: {{ printf $utm_link "https://cpco.io/jobs" "jobs" }}
-  [hire]: {{ printf $utm_link "https://cpco.io/hire" "hire" }}
-  [slack]: {{ printf $utm_link "https://cpco.io/slack" "slack" }}
-  [linkedin]: {{ printf $utm_link "https://cpco.io/linkedin" "linkedin" }}
-  [twitter]: {{ printf $utm_link "https://cpco.io/twitter" "twitter" }}
-  [testimonial]: {{ printf $utm_link "https://cpco.io/leave-testimonial" "testimonial" }}
-  [office_hours]: {{ printf $utm_link "https://cloudposse.com/office-hours" "office_hours" }}
-  [newsletter]: {{ printf $utm_link "https://cpco.io/newsletter" "newsletter" }}
-  [discourse]: {{ printf $utm_link "https://ask.sweetops.com/" "discourse" }}
-  [email]: {{ printf $utm_link "https://cpco.io/email" "email" }}
-  [commercial_support]: {{ printf $utm_link "https://cpco.io/commercial-support" "commercial_support" }}
-  [we_love_open_source]: {{ printf $utm_link "https://cpco.io/we-love-open-source" "we_love_open_source" }}
-  [terraform_modules]: {{ printf $utm_link "https://cpco.io/terraform-modules" "terraform_modules" }}
-  [readme_header_img]: {{ printf "https://cloudposse.com/readme/header/img" }}
-  [readme_header_link]: {{ printf $utm_link "https://cloudposse.com/readme/header/link" "readme_header_link" }}
-  [readme_footer_img]: {{ printf "https://cloudposse.com/readme/footer/img" }}
-  [readme_footer_link]: {{ printf $utm_link "https://cloudposse.com/readme/footer/link" "readme_footer_link" }}
-  [readme_commercial_support_img]: {{ printf "https://cloudposse.com/readme/commercial-support/img" }}
-  [readme_commercial_support_link]: {{ printf $utm_link "https://cloudposse.com/readme/commercial-support/link" "readme_commercial_support_link" }}
-  [share_twitter]: {{ printf "https://twitter.com/intent/tweet/?text=%s&url=https://github.com/%s" ((ds "config").name | regexp.Replace " " "+") (ds "config").github_repo }}
-  [share_linkedin]: {{ printf "https://www.linkedin.com/shareArticle?mini=true&title=%s&url=https://github.com/%s" ((ds "config").name | regexp.Replace " " "+") (ds "config").github_repo }}
-  [share_reddit]: {{ printf "https://reddit.com/submit/?url=https://github.com/%s" (ds "config").github_repo }}
-  [share_facebook]: {{ printf "https://facebook.com/sharer/sharer.php?u=https://github.com/%s" (ds "config").github_repo }}
-  [share_googleplus]: {{ printf "https://plus.google.com/share?url=https://github.com/%s" (ds "config").github_repo }}
-  [share_email]: {{ printf "mailto:?subject=%s&body=https://github.com/%s" ((ds "config").name | regexp.Replace " " "+") (ds "config").github_repo }}
-  [beacon]: {{ printf "https://ga-beacon.cloudposse.com/UA-76589703-4/%s?pixel&cs=github&cm=readme&an=%s" (ds "config").github_repo (filepath.Base ((ds "config").github_repo)) }}
+  [logo]: https://www.thoro.ai/assets/thoro-logo.png
+  [docs]: {{ printf $utm_link "https://thoro.ao" "docs" }}
+  [website]: {{ printf $utm_link "https://thoro.ai" "website" }}
+  [github]: {{ printf $utm_link "https://thoro.ai" "github" }}
